@@ -11,6 +11,7 @@ public class ProjectileBehaviour : MonoBehaviour {
 	private bool hit;
 	[SerializeField]private float timer;
 	[SerializeField]private float speed;
+	[SerializeField]private float _forceGroundTime;
 	void Start () {
 		_planet = GameObject.Find ("Planet");
 		_rig = GetComponent<Rigidbody2D> ();
@@ -19,10 +20,13 @@ public class ProjectileBehaviour : MonoBehaviour {
 	}
 
 	void Update () {
+		float AngleRad = Mathf.Atan2(_planet.transform.position.y - transform.position.y, _planet.transform.position.x - transform.position.x);
+		float AngleDeg = (180 / Mathf.PI) * AngleRad;
+		this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
 		if (!hit) {
 			_distance = Vector3.Distance (_planet.transform.position, transform.position);
 			if (_distance <= _gravityDistance) {
-				timer += Time.fixedDeltaTime; 
+				timer += Time.fixedDeltaTime / _forceGroundTime; 
 				print (timer);
 				_forceAmount += timer;
 				Vector3 _desiredDirection = _planet.transform.position - transform.position;
@@ -36,6 +40,6 @@ public class ProjectileBehaviour : MonoBehaviour {
 	}
 	void OnCollisionEnter2D(Collision2D other){
 		hit = true;	
-		_rig.velocity = new Vector2(0,0);
+		Destroy (_rig);
 	}
 }
