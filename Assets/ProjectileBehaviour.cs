@@ -50,12 +50,14 @@ public class ProjectileBehaviour : MonoBehaviour {
 		if (other.gameObject.tag == "Planet") {
 			_particleEffect.PlanetImpactParticles ((int)_spawnAmount, transform.position);
 			SpawnEntity ();
+			Destroy (GetComponent<ProjectileBehaviour> ());
 		}
 	}
 	void SpawnEntity(){
 		for (int i = 1; i < _spawnAmount + 1; i++) {
 			GameObject obj = Instantiate (gameObject, transform.position + transform.right * -i, transform.rotation);
 			Destroy (obj.GetComponent<ProjectileBehaviour> ());
+			Destroy (obj.GetComponent<Rigidbody2D> ());
 		}
 	}
 	public void Shoot(float _shotSpeed){
