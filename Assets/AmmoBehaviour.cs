@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class AmmoBehaviour : MonoBehaviour {
 	private LevelBehaviour Levelbehaviour;
-	private List<GameObject> _ammo = new List<GameObject>();
+	[SerializeField]private GameObject _ammo;
+	public GameObject getAmmoObj;
+	public List<GameObject> _fullAmmo = new List<GameObject>();
 	void Start () {
 		Levelbehaviour = GameObject.Find ("Main Camera").GetComponent<LevelBehaviour> ();
+		for (int i = 0; i < Levelbehaviour.getAmmo; i++) {
+			_fullAmmo.Add (_ammo);
+		}
 	}
 	
 	void Update () {
-		print (Levelbehaviour.getAmmo);
+		
 	}
 }

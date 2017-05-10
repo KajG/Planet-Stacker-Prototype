@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelBehaviour : Component{
-	[SerializeField]protected GameObject _typeOfPlanet;
-	[SerializeField]protected GameObject _cannon;
-	[SerializeField]protected Transform _planetPosition;
-	[SerializeField]protected Transform _cannonPosition;
-	[SerializeField]protected int _amountOfAmmo;
+public class LevelBehaviour : MonoBehaviour{
+	private GameObject _typeOfPlanet;
+	private GameObject _cannon;
+	private Transform _planetPosition;
+	private Transform _cannonPosition;
+	private int _amountOfAmmo;
+	private int _desiredScore;
 	public int getAmmo{get{return _amountOfAmmo;}}
-	[SerializeField]protected int _desiredScore;
 	public int getScore{get{return _desiredScore;}}
-	public LevelBehaviour(int ammo, int maxScore, GameObject planet, GameObject cannon, Transform planetPos, Transform cannonPos){
+	public void Level(int ammo, int maxScore, GameObject planet, GameObject cannon, Transform planetPos, Transform cannonPos){
 		_cannon = cannon;
 		_typeOfPlanet = planet;
 		_amountOfAmmo = ammo;

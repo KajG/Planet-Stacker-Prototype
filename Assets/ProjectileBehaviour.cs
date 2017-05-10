@@ -26,14 +26,13 @@ public class ProjectileBehaviour : MonoBehaviour {
 	}
 
 	void Update () {
-		float AngleRad = Mathf.Atan2(_planet.transform.position.y - transform.position.y, _planet.transform.position.x - transform.position.x);
-		float AngleDeg = (180 / Mathf.PI) * AngleRad;
-		this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
 		if (!hit && gotShot) {
+			float AngleRad = Mathf.Atan2(_planet.transform.position.y - transform.position.y, _planet.transform.position.x - transform.position.x);
+			float AngleDeg = (180 / Mathf.PI) * AngleRad;
+			this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
 			_distance = Vector3.Distance (_planet.transform.position, transform.position);
 			if (_distance <= _gravityDistance) {
 				timer += Time.fixedDeltaTime / _forceGroundTime; 
-				print (timer);
 				_forceAmount += timer;
 				Vector3 _desiredDirection = _planet.transform.position - transform.position;
 				_desiredDirection.Normalize ();

@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Level1 : MonoBehaviour {
-	[SerializeField]protected GameObject _typeOfPlanet;
-	[SerializeField]protected GameObject _cannon;
-	[SerializeField]protected Transform _planetPosition;
-	[SerializeField]protected Transform _cannonPosition;
-	[SerializeField]protected int _amountOfAmmo;
-	[SerializeField]protected int _desiredScore;
+	[SerializeField]private GameObject _typeOfPlanet;
+	[SerializeField]private GameObject _cannon;
+	[SerializeField]private Transform _planetPosition;
+	[SerializeField]private Transform _cannonPosition;
+	[SerializeField]private int _amountOfAmmo;
+	[SerializeField]private int _desiredScore;
+	private LevelBehaviour Levelbehaviour;
 	void Awake () {
-		new LevelBehaviour (_amountOfAmmo, _desiredScore, _typeOfPlanet, _cannon, _planetPosition, _cannonPosition);
-	}
-	
-	void Update () {
-		
+		Levelbehaviour = GetComponent<LevelBehaviour> ();
+		Levelbehaviour.Level (_amountOfAmmo, _desiredScore, _typeOfPlanet, _cannon, _planetPosition, _cannonPosition);
 	}
 }
